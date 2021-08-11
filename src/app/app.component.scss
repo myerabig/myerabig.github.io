@@ -1,4 +1,4 @@
-*:not(i) {
+.app:not(i) {
   font-family: "PT Sans";
 }
 
@@ -166,5 +166,8 @@ h1 {
   .p-card .p-card-body {
     padding: unset;
     margin: 20px;
+  }
+  h1 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
   }
 }
