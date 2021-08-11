@@ -1,0 +1,170 @@
+*:not(i) {
+  font-family: "PT Sans";
+}
+
+h1 {
+  text-align: center;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pi-search {
+  margin-right: 10px;
+}
+
+.pi-times {
+  margin-left: -25px;
+  color: red;
+  cursor: pointer;
+}
+
+.filter-button {
+  margin-left: 20px;
+}
+
+.search-results {
+  width: 80%;
+  margin: auto;
+}
+
+.book-table {
+  table-layout: fixed;
+  width: 100%;
+  cursor: pointer;
+}
+
+.table-header {
+  font-weight: bold;
+}
+
+.pi-sort-alt, .pi-sort-alpha-down, .pi-sort-alpha-up, .pi-sort-numeric-down, .pi-sort-numeric-up {
+  margin-left: 15px;
+  color: royalblue;
+  cursor: pointer;
+}
+
+.td-image {
+  min-width: 15%;
+}
+
+.td-title {
+  width: 60%;
+}
+
+.td-category {
+  width: 18%;
+}
+
+.td-level {
+  width: 7%;
+}
+
+.book-image {
+  height: 80px;
+}
+
+.book-title {
+  font-size: 20px;
+}
+
+.book-modal-left {
+  width: 30%;
+  vertical-align: top;
+
+  img {
+    width: 200px;
+  }
+}
+
+.book-modal-right {
+  width: 70%;
+}
+
+.book-modal-info {
+  border-collapse: collapse;
+  border-style: hidden;
+
+  tr {
+    vertical-align: top;
+
+    td {
+      border: 1px solid darkgray;
+      padding: 10px 0 10px 10px;
+    }
+
+    .book-modal-info-left {
+      width: 15%;
+    }
+
+    .book-modal-info-right {
+      width: 85%;
+    }
+  }
+}
+
+.filter-modal-table {
+  width: 80%;
+  margin: auto;
+  border-collapse: collapse;
+  border-style: hidden;
+
+  tr {
+    vertical-align: top;
+
+    td {
+      border: 1px solid darkgray;
+      padding: 10px 0 10px 10px;
+    }
+
+    .filter-modal-table-left {
+      width: 50%;
+    }
+
+    .filter-modal-table-right {
+      width: 50%;
+    }
+  }
+}
+
+.page-numbers {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 50%;
+  margin: auto;
+
+  p, i {
+    color: royalblue;
+    cursor: pointer;
+    font-size: 20px;
+  }
+
+  .current-page {
+    display: block;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+
+    -moz-border-radius: 30px; /* or 50% */
+    border-radius: 30px; /* or 50% */
+
+    background-color: royalblue;
+    color: white;
+    text-align: center;
+  }
+}
+
+:host ::ng-deep {
+  .p-card .p-card-content {
+    padding: unset;
+  }
+  .p-card .p-card-body {
+    padding: unset;
+    margin: 20px;
+  }
+}

@@ -1,0 +1,142 @@
+<div class="app">
+  <h1>Library Catalog</h1>
+  <div class="search-bar">
+    <i class="pi pi-search"></i>
+    <input type="text" pInputText [size]="100" placeholder="Search for a book" [(ngModel)]="searchText"
+           (ngModelChange)="search()"/>
+    <i class="pi pi-times" (click)="clearSearch()"></i>
+    <p-button class="filter-button" label="Filters" icon="pi pi-filter" [badge]="filterCount.toString()"
+              badgeClass="p-badge-danger" (click)="handleFilterModal()"></p-button>
+  </div>
+  <div class="search-results" *ngIf="searchResults.length > 0">
+    <p-card>
+      <table class="book-table">
+        <tr class="table-header">
+          <td class="td-image">
+            <span>Cover</span>
+          </td>
+          <td class="td-title">
+            <span>Title/Author</span>
+            <i class="pi pi-sort-alt" *ngIf="sortedTitleAuthor == 0" (click)="sortTitleAuthor()"></i>
+            <i class="pi pi-sort-alpha-down" *ngIf="sortedTitleAuthor == 1" (click)="sortTitleAuthor()"></i>
+            <i class="pi pi-sort-alpha-up" *ngIf="sortedTitleAuthor == 2" (click)="sortTitleAuthor()"></i>
+          </td>
+          <td class="td-category">
+            <span>Category</span>
+          </td>
+          <td class="td-level">
+            <span>Level</span>
+            <i class="pi pi-sort-alt" *ngIf="sortedLevel == 0" (click)="sortLevel()"></i>
+            <i class="pi pi-sort-numeric-down" *ngIf="sortedLevel == 1" (click)="sortLevel()"></i>
+            <i class="pi pi-sort-numeric-up" *ngIf="sortedLevel == 2" (click)="sortLevel()"></i>
+          </td>
+        </tr>
+      </table>
+    </p-card>
+    <p-card *ngFor="let book of searchResultsCurrentPage" (click)="handleModal(book)">
+      <table class="book-table">
+        <tr>
+          <td class="td-image">
+            <img class="book-image" src="{{book.image}}"/>
+          </td>
+          <td class="td-title">
+            <p class="book-title">{{book.title}}</p>
+            <p>{{book.author}}</p>
+          </td>
+          <td class="td-category">
+            <p>{{book.category}}</p>
+          </td>
+          <td class="td-level">
+            <p>{{book.level}}</p>
+          </td>
+        </tr>
+      </table>
+    </p-card>
+    <div class="page-numbers">
+      <i class="pi pi-arrow-circle-left" (click)="pageArrow(-1)"></i>
+      <p *ngFor="let page of pageNumbers; first as isFirst"
+         [class]="isFirst ? 'current-page page-number': 'page-number'" (click)="pageNumber($event, page)">{{page}}</p>
+      <i class="pi pi-arrow-circle-right" (click)="pageArrow(1)"></i>
+    </div>
+  </div>
+  <p-dialog class="book-modal" header="Book Details" [(visible)]="displayModal" [style]="{width: '70vw'}">
+    <table>
+      <tr>
+        <td class="book-modal-left">
+          <img src="{{modalBook.image}}"/>
+          <h3>{{modalBook.title}}</h3>
+          <h4>{{modalBook.author}}</h4>
+        </td>
+        <td class="book-modal-right">
+          <table class="book-modal-info">
+            <tr>
+              <td class="book-modal-info-left">Category</td>
+              <td class="book-modal-info-right">{{modalBook.category}}</td>
+            </tr>
+            <tr>
+              <td>Series</td>
+              <td>{{modalBook.series}}</td>
+            </tr>
+            <tr>
+              <td>Level</td>
+              <td>{{modalBook.level}}</td>
+            </tr>
+            <tr>
+              <td>Points</td>
+              <td>{{modalBook.points}}</td>
+            </tr>
+            <tr>
+              <td>Summary</td>
+              <td>{{modalBook.summary}}</td>
+            </tr>
+            <tr>
+              <td>Pages</td>
+              <td>{{modalBook.pages}}</td>
+            </tr>
+            <tr>
+              <td>Year Published</td>
+              <td>{{modalBook.year}}</td>
+            </tr>
+            <tr>
+              <td>ISBN</td>
+              <td>{{modalBook.isbn}}</td>
+            </tr>
+            <tr>
+              <td>Topics</td>
+              <td>{{modalBook.topics}}</td>
+            </tr>
+            <tr>
+              <td>Color</td>
+              <td>{{modalBook.color}}</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <ng-template pTemplate="footer">
+      <p-button icon="pi pi-check" (click)="displayModal = false" label="Done" styleClass="p-button-text"></p-button>
+    </ng-template>
+  </p-dialog>
+  <p-dialog header="Filters" [(visible)]="displayFilterModal" [style]="{width: '40vw'}">
+    <table class="filter-modal-table">
+      <tr>
+        <td class="filter-modal-table-left">Category</td>
+        <td class="filter-modal-table-right">
+          <p-checkbox name="filter-category" label="Fiction" value="fiction" [(ngModel)]="filterCategoryValues"></p-checkbox>
+          <p-checkbox name="filter-category" label="Nonfiction" value="nonfiction" [(ngModel)]="filterCategoryValues"></p-checkbox>
+        </td>
+      </tr>
+      <tr>
+        <td>Level</td>
+        <td>
+          <p-inputNumber [(ngModel)]="filterMinLevel" mode="decimal" [showButtons]="true" inputId="minmax-buttons" [min]="1" [max]="10"></p-inputNumber>
+          to
+          <p-inputNumber [(ngModel)]="filterMaxLevel" mode="decimal" [showButtons]="true" inputId="minmax-buttons" [min]="1" [max]="10"></p-inputNumber>
+        </td>
+      </tr>
+    </table>
+    <ng-template pTemplate="footer">
+      <p-button icon="pi pi-check" (click)="displayFilterModal = false" label="Done" styleClass="p-button-text"></p-button>
+    </ng-template>
+  </p-dialog>
+</div>
